@@ -3,6 +3,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 import path from 'path';
 import './database';
+import productoRouter from './routes/productos.routes';
 
 const app = express();
 app.set('port', process.env.PORT || 4000);
@@ -17,3 +18,5 @@ app.use(express.urlencoded({extends:true}));
 app.use(morgan('dev'));
 
 app.use(express.static(path.join(__dirname, '../public')));
+
+app.use('/apisham', productoRouter);
