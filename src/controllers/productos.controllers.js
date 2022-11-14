@@ -57,3 +57,18 @@ export const editarProducto = async (req,res)=>{
 
   }
 }
+
+//DELETE 
+export const borrarProducto = async (req, res) => {
+  try {
+    await Producto.findByIdAndDelete(req.params.id);
+    res.status(200).json({
+      mensaje: "Se eliminó correctamente el producto",
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({
+      mensaje: "Error al intentar borrar el producto",
+    });
+  }
+};
