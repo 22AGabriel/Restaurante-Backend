@@ -1,0 +1,30 @@
+{
+  "name": "restaurante-backend",
+  "version": "1.0.0",
+  "description": "base de datos del proyecto final del restaurante",
+  "main": "index.js",
+  "scripts": {
+    "start": "babel-node src/index.js",
+    "dev": "nodemon --exec babel-node src/index.js"
+  },
+  "keywords": [
+    "nodejs",
+    "mongoose",
+    "express",
+    "babel",
+    "cors",
+    "morgan"
+  ],
+  "author": "Palacio Fernandez Victoria, Uncos Javier, Lopez Nazarena, Daoua Josefina, Azubel Cristian Gabriel",
+  "license": "ISC",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-validator": "^6.14.2",
+    "mongoose": "^6.6.7",
+    "morgan": "^1.10.0"
+  }
+}
