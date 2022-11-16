@@ -14,3 +14,17 @@ export const crearUsuario = async (req, res) => {
     });
   }
 };
+
+
+
+export const obtenerUsuarios = async(req,res)=>{
+   try {
+    const usuarioBuscado = await Usuario.findById(req.params.id)
+    res.status(200).json(usuarioBuscado)
+   } catch (error) {
+    console.log(error)
+    res.status(404).json({
+      mensaje:"no se pudo obtener el usuario"
+    })
+   }
+}
