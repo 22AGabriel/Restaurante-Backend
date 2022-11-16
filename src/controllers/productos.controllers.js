@@ -1,7 +1,7 @@
 import Producto from "../models/producto"
 
 //get
-export const listaProductos = async(req,res)=>{
+export const listarProductos = async(req,res)=>{
     try {
         const productos = await Producto.find();
         res.status(200).json(productos);

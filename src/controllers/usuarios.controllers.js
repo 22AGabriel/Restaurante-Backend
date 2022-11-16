@@ -14,3 +14,17 @@ export const crearUsuario = async (req, res) => {
     });
   }
 };
+
+export const listarUsuarios = async(req,res)=>{
+  try {
+    const listaUsuarios = await Usuario.find()
+   res.status(200).json(listaUsuarios)
+    
+  } catch (error) {
+    console.log(error)
+    res.status(404).json({
+      mensaje:"error al obtener la lista de usuarios"
+    })
+  }
+
+}
