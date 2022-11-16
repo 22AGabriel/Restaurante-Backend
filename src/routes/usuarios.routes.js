@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { crearUsuario, listarUsuarios,obtenerUsuarios } from "../controllers/usuarios.controllers";
+import { borrarUsuario, crearUsuario, listarUsuarios,obtenerUsuarios } from "../controllers/usuarios.controllers";
 const router = Router();
 
 router
@@ -8,6 +8,6 @@ router
     .get(listarUsuarios)
 
 
-router.route("/usuarios/:id").get(obtenerUsuarios)
+router.route("/usuarios/:id").get(obtenerUsuarios).delete(borrarUsuario)
 
 export default router
