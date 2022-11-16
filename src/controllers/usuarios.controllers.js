@@ -38,3 +38,16 @@ export const listarUsuarios = async(req,res)=>{
     })
   }
 }
+
+export const borrarUsuario = async (req, res) =>{
+  try {
+    await Usuario.findByIdAndDelete(req.params.id);
+    res.status(200).json({
+      mensaje: 'El usuario fue eliminado con éxito'
+    });
+  } catch (error) {
+    res.status(404).json({
+      mensaje: 'Error al intentar borrar el Usuario'
+    });
+  }
+}
