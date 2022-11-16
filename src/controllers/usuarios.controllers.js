@@ -26,7 +26,7 @@ export const obtenerUsuarios = async(req,res)=>{
       mensaje:"no se pudo obtener el usuario"
     })
    }
-
+}
 export const listarUsuarios = async(req,res)=>{
   try {
     const listaUsuarios = await Usuario.find()
@@ -38,6 +38,4 @@ export const listarUsuarios = async(req,res)=>{
       mensaje:"error al obtener la lista de usuarios"
     })
   }
-
-
 }
