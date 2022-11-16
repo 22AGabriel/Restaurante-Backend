@@ -1,3 +1,4 @@
+import { validationResult } from "express-validator";
 import Producto from "../models/producto"
 
 //get
@@ -28,13 +29,18 @@ export const obtenerProductos = async(req, res) => {
 //POST
 export const crearProducto = async (req, res) => {
     try {
+      const errors = validationResult(req)
+      if(!errors.isEmpty()){
+        return res.status(400).json({
+          errores: errors.array()
+        })
+      }
       const nuevoProducto= new Producto(req.body);
       await nuevoProducto.save();
       res.status(201).json({
         mensaje: "Se agregó un nuevo producto",
       });
     } catch (error) {
-      console.log(error);
       res.status(404).json({
         mensaje: "Ocurrió un error al intentar agregar el nuevo producto",
       });
@@ -45,6 +51,12 @@ export const crearProducto = async (req, res) => {
 export const editarProducto = async (req,res)=>{
       
   try{
+    const errors = validationResult(req);
+        if(!errors.isEmpty()){
+            return res.status(400).json({
+                errores: errors.array()
+            })
+        }
     await Producto.findByIdAndUpdate(req.params.id,req.body)
     res.status(200).json({
       mensaje:"el producto pudo ser editaddo correctamente"
