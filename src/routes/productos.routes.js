@@ -112,5 +112,3 @@ router
   .delete(borrarProducto);
 
 export default router;
-// "categoria": "Sandwich",
-// "cantidad": 1
