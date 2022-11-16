@@ -41,17 +41,6 @@ router
           "La contraseña debe tener entre 8 y 16 caracteres, al menos un dígito, al menos una mayúscula, al menos una minúscula y NO contener un caracter especial"
         ),
       check("perfil").notEmpty().withMessage("Debe seleccionar un perfil"),
-      check("carrito")
-        .notEmpty()
-        .withMessage("El carrito puede contener informacion")
-        .isNumeric()
-        .withMessage("El dato debe ser numerico"),
-      check("pedidos")
-        .notEmpty()
-        .withMessage("El pedido puede contener informacion")
-        .isNumeric()
-        .withMessage("El dato debe ser numerico"),
-      check("estado").notEmpty().withMessage("El estado es obligatorio"),
     ],
     crearUsuario
   )
@@ -60,8 +49,9 @@ router
 router
   .route("/usuarios/:id")
   .get(obtenerUsuarios)
-  .put([
-    check("nombreUsuario")
+  .put(
+    [
+      check("nombreUsuario")
         .notEmpty()
         .withMessage("El nombre del usuario es obligatorio")
         .isLength({ min: 3, max: 30 })
@@ -88,19 +78,9 @@ router
           "La contraseña debe tener entre 8 y 16 caracteres, al menos un dígito, al menos una mayúscula, al menos una minúscula y NO contener un caracter especial"
         ),
       check("perfil").notEmpty().withMessage("Debe seleccionar un perfil"),
-      check("carrito")
-        .notEmpty()
-        .withMessage("El carrito puede contener informacion")
-        .isNumeric()
-        .withMessage("El dato debe ser numerico"),
-      check("pedidos")
-        .notEmpty()
-        .withMessage("El pedido puede contener informacion")
-        .isNumeric()
-        .withMessage("El dato debe ser numerico"),
-      check("estado").notEmpty().withMessage("El estado es obligatorio"),
-  ],
-    editarUsuarios)
+    ],
+    editarUsuarios
+  )
   .delete(borrarUsuario);
 
 export default router;
