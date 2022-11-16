@@ -30,7 +30,6 @@ export const listarUsuarios = async(req,res)=>{
   try {
     const listaUsuarios = await Usuario.find()
    res.status(200).json(listaUsuarios)
-    
   } catch (error) {
     console.log(error)
     res.status(404).json({
@@ -48,6 +47,19 @@ export const borrarUsuario = async (req, res) =>{
   } catch (error) {
     res.status(404).json({
       mensaje: 'Error al intentar borrar el Usuario'
-    });
+    })
+}
+}
+export const editarUsuarios = async(req,res)=>{
+  try{
+    await Usuario.findByIdAndUpdate(req.params.id, req.body);
+    res.status(200).json({
+      mensaje:'el usuario se edito correctamente'
+    })
+  }catch(error){
+    console.log(error);
+    res.status(400).json({
+      mensaje:'error al intentar editar el usuario'
+    })
   }
 }
