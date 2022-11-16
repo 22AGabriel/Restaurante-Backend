@@ -15,6 +15,18 @@ export const crearUsuario = async (req, res) => {
   }
 };
 
+
+export const obtenerUsuarios = async(req,res)=>{
+   try {
+    const usuarioBuscado = await Usuario.findById(req.params.id)
+    res.status(200).json(usuarioBuscado)
+   } catch (error) {
+    console.log(error)
+    res.status(404).json({
+      mensaje:"no se pudo obtener el usuario"
+    })
+   }
+
 export const listarUsuarios = async(req,res)=>{
   try {
     const listaUsuarios = await Usuario.find()
@@ -26,5 +38,6 @@ export const listarUsuarios = async(req,res)=>{
       mensaje:"error al obtener la lista de usuarios"
     })
   }
+
 
 }
