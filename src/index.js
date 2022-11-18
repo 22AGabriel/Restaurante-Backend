@@ -5,6 +5,7 @@ import path from 'path';
 import './database';
 import productoRouter from './routes/productos.routes';
 import usuariosRouter from './routes/usuarios.routes';
+import loginRouter from './routes/login.routes';
 
 const app = express();
 app.set('port', process.env.PORT || 4000);
@@ -22,3 +23,4 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 app.use('/apisham', productoRouter);
 app.use('/apisham', usuariosRouter);
+app.use('/apisham', loginRouter);
