@@ -33,3 +33,16 @@ export const listarPedidos = async(req, res)=>{
         })
     }
 }
+
+export const obtenerPedidos = async(req, res)=>{
+    try{
+        console.log(req.params.id)
+        const pedidoBuscado = await Pedido.findById(req.params.id);
+        res.status(200).json(pedidoBuscado);
+    }catch(error){
+        console.log(error);
+        res.status(404).json({
+            mensaje: 'No se encontro el pedido buscado'
+        })
+    }
+}
