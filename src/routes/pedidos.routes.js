@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { check } from "express-validator";
 import {
+    borrarPedido,
   crearPedido,
   editarPedido,
   listarPedidos,
@@ -17,7 +18,7 @@ router
       check("fecha").notEmpty().withMessage("La fecha es obligatoria"),
       check("estado")
         .notEmpty()
-        .withMessage("El estado es un dato obligatorio"),
+        .withMessage("El estado es un dato obligatorio").isIn(['Pendiente','Realizado']).withMessage('Debe elegir una opcion valida'),
     ],
     crearPedido
   )
@@ -32,9 +33,9 @@ router
       check("fecha").notEmpty().withMessage("La fecha es obligatoria"),
       check("estado")
         .notEmpty()
-        .withMessage("El estado es un dato obligatorio"),
+        .withMessage("El estado es un dato obligatorio").isIn(['Pendiente','Realizado']).withMessage('Debe elegir una opcion valida'),
     ],
     editarPedido
-  );
+  ).delete(borrarPedido);
 
 export default router;

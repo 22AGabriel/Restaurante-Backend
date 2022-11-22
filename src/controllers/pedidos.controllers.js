@@ -66,3 +66,17 @@ export const editarPedido = async(req, res)=>{
         })
     }
 }
+
+export const borrarPedido = async(req,res)=>{
+    try{    
+        await Pedido.findByIdAndDelete(req.params.id);
+        res.status(200).json({
+            mensaje:'Se borro correctamente el pedido'
+        })
+    }catch(error){
+        console.log(error);
+        res.status(404).json({
+            mensaje:'No se pudo eliminar el pedido'
+        })
+    }
+}
