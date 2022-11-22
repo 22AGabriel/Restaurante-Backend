@@ -10,10 +10,13 @@ const pedidoSchema = new Schema({
     required: true,
   },
   fecha: {
-    type: Number,
+    type: String,
     required: true,
   },
-  estado: { type: String, required: true },
+  estado: { 
+    type: String, 
+    required: true 
+  },
 });
 
 export const Pedido = mongoose.model('pedido', pedidoSchema);
