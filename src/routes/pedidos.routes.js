@@ -2,6 +2,7 @@ import { Router } from "express";
 import { check } from "express-validator";
 import {
   crearPedido,
+  editarPedido,
   listarPedidos,
   obtenerPedidos,
 } from "../controllers/pedidos.controllers";
@@ -23,7 +24,17 @@ router
   .get(listarPedidos);
 
 router
-.route("/pedidos/:id")
-.get(obtenerPedidos);
+  .route("/pedidos/:id")
+  .get(obtenerPedidos)
+  .put(
+    [
+      check("usuario").notEmpty().withMessage("El usuario es obligatorio"),
+      check("fecha").notEmpty().withMessage("La fecha es obligatoria"),
+      check("estado")
+        .notEmpty()
+        .withMessage("El estado es un dato obligatorio"),
+    ],
+    editarPedido
+  );
 
 export default router;
