@@ -2,10 +2,13 @@ import express from "express";
 import cors from "cors";
 import morgan from "morgan";
 import path from "path";
-import "./database";
 import productoRouter from "./routes/productos.routes";
 import usuariosRouter from "./routes/usuarios.routes";
 import pedidoRouter from "./routes/pedidos.routes";
+import "./database";
+import * as dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = express();
 app.set("port", process.env.PORT || 4000);

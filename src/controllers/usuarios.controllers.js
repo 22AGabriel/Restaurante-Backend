@@ -1,6 +1,7 @@
 import { validationResult } from "express-validator";
 import Usuario from "../models/usuario";
 import bcrypt from 'bcryptjs';
+import generarJWT from "../helpers/jwt";
 
 export const crearUsuario = async (req, res) => {
   try {
@@ -110,15 +111,21 @@ export const login = async(req,res)=>{
            mensaje: "Correo o contraseña invalido",
        });
    }
-   if(password !== usuario.password){
+   const passwordValido = bcrypt.compareSync(password, usuario.password);
+
+   if(!passwordValido){
        return res.status(400).json({
            mensaje: "Correo o contraseña invalido",
        })
    }
+
+   const token = await generarJWT(usuario._id, usuario.nombreUsuario)
+
    res.status(200).json({
        mensaje: "El usuario existe",
        uid:  usuario._id,
        nombre: usuario.nombreUsuario,
+       token
    });
   } catch (error) {
    res.status(400).json({
