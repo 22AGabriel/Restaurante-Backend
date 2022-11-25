@@ -2,11 +2,13 @@ import express from "express";
 import cors from "cors";
 import morgan from "morgan";
 import path from "path";
-import "./database";
 import productoRouter from "./routes/productos.routes";
 import usuariosRouter from "./routes/usuarios.routes";
-import loginRouter from "./routes/login.routes";
 import pedidoRouter from "./routes/pedidos.routes";
+import "./database";
+import * as dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = express();
 app.set("port", process.env.PORT || 4000);
@@ -23,6 +25,6 @@ app.use(morgan("dev"));
 app.use(express.static(path.join(__dirname, "../public")));
 
 app.use("/apisham", productoRouter);
-app.use("/apisham", usuariosRouter);
-app.use("/apisham", loginRouter);
+app.use("/apisham/auth", usuariosRouter);
 app.use("/apisham", pedidoRouter);
+

@@ -5,6 +5,7 @@ import {
   listarUsuarios,
   obtenerUsuarios,
   borrarUsuario,
+  login,
 } from "../controllers/usuarios.controllers";
 import { check } from "express-validator";
 
@@ -40,11 +41,27 @@ router
         .withMessage(
           "La contraseña debe tener entre 8 y 16 caracteres, al menos un dígito, al menos una mayúscula, al menos una minúscula y NO contener un caracter especial"
         ),
-      check("perfil").notEmpty().withMessage("Debe seleccionar un perfil"),
     ],
     crearUsuario
   )
   .get(listarUsuarios);
+router.route("/usuarios/login").post(
+  [
+    check("email")
+      .notEmpty()
+      .withMessage("El email es obligatorio")
+      .matches(/^[^@]+@[^@]+\.[a-zA-Z]{2,}$/)
+      .withMessage("El email debe ser valido"),
+    check("password")
+      .notEmpty()
+      .withMessage("La contraseña es obligatoria")
+      .matches(/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/)
+      .withMessage(
+        "La contraseña debe tener entre 8 y 16 caracteres, al menos un dígito, al menos una mayúscula, al menos una minúscula y NO contener un caracter especial"
+      ),
+  ],
+  login
+);
 
 router
   .route("/usuarios/:id")
@@ -77,7 +94,6 @@ router
         .withMessage(
           "La contraseña debe tener entre 8 y 16 caracteres, al menos un dígito, al menos una mayúscula, al menos una minúscula y NO contener un caracter especial"
         ),
-      check("perfil").notEmpty().withMessage("Debe seleccionar un perfil"),
     ],
     editarUsuarios
   )

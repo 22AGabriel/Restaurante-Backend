@@ -1,5 +1,7 @@
 import { validationResult } from "express-validator";
 import Usuario from "../models/usuario";
+import bcrypt from 'bcryptjs';
+import generarJWT from "../helpers/jwt";
 
 export const crearUsuario = async (req, res) => {
   try {
@@ -9,10 +11,25 @@ export const crearUsuario = async (req, res) => {
         errores: errors.array()
       })
     }
-    const usuarioNuevo = new Usuario(req.body);
-    await usuarioNuevo.save();
+    const {email, password} = req.body;
+    let usuario  = await Usuario.findOne({email});
+    if(usuario){
+      return res.status(400).json({
+        mensaje: 'Ya existe un usuario con el correo ingresado',
+      });
+    }
+    
+    usuario = new Usuario(req.body);
+    
+    const salt = bcrypt.genSaltSync();
+    usuario.password = bcrypt.hashSync(password, salt);
+
+    await usuario.save();
+
     res.status(201).json({
       mensaje: "Se agregó un nuevo usuario",
+      usuario: usuario.nombreUsuario,
+      uid: usuario._id,
     });
   } catch (error) {
     console.log(error);
@@ -76,3 +93,43 @@ export const editarUsuarios = async(req,res)=>{
     })
   }
 }
+
+
+export const login = async(req,res)=>{
+  try {
+  const errors = validationResult(req);
+  if(!errors.isEmpty()){
+   return res.status(400).json({
+       errors:  errors.array(),
+   });}
+
+   const  {email , password}  = req.body;
+
+   let usuario = await Usuario.findOne({email});
+   if(!usuario){
+       return res.status(400).json({
+           mensaje: "Correo o contraseña invalido",
+       });
+   }
+   const passwordValido = bcrypt.compareSync(password, usuario.password);
+
+   if(!passwordValido){
+       return res.status(400).json({
+           mensaje: "Correo o contraseña invalido",
+       })
+   }
+
+   const token = await generarJWT(usuario._id, usuario.nombreUsuario)
+
+   res.status(200).json({
+       mensaje: "El usuario existe",
+       uid:  usuario._id,
+       nombre: usuario.nombreUsuario,
+       token
+   });
+  } catch (error) {
+   res.status(400).json({
+       mensaje: "Usuario o contraseña invalido"
+   });
+  }
+};
