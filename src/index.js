@@ -22,6 +22,6 @@ app.use(morgan("dev"));
 app.use(express.static(path.join(__dirname, "../public")));
 
 app.use("/apisham", productoRouter);
-app.use("/apisham", usuariosRouter);
+app.use("/apisham/auth", usuariosRouter);
 app.use("/apisham", pedidoRouter);
 
