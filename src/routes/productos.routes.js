@@ -49,7 +49,7 @@ router
         .withMessage("La categoria es un dato obligatorio")
         .isIn([
           "Sandwich",
-          "Plato",
+          "Al Plato",
           "Pures",
           "Agregados",
           "Bebida sin alcohol",
@@ -99,7 +99,7 @@ router
         .withMessage("La categoria es un dato obligatorio")
         .isIn([
           "Sandwich",
-          "Plato",
+          "Al plato",
           "Pures",
           "Agregados",
           "Bebida sin alcohol",
