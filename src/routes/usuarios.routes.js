@@ -37,10 +37,8 @@ router
       check("password")
         .notEmpty()
         .withMessage("La contraseña es obligatoria")
-        .matches(/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/)
-        .withMessage(
-          "La contraseña debe tener entre 8 y 16 caracteres, al menos un dígito, al menos una mayúscula, al menos una minúscula y NO contener un caracter especial"
-        ),
+        .isLength({min : 8})
+        .withMessage("La contraseña debe tener un mínimo de 8 caracteres"),
     ],
     crearUsuario
   )
@@ -55,10 +53,8 @@ router.route("/usuarios/login").post(
     check("password")
       .notEmpty()
       .withMessage("La contraseña es obligatoria")
-      .matches(/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/)
-      .withMessage(
-        "La contraseña debe tener entre 8 y 16 caracteres, al menos un dígito, al menos una mayúscula, al menos una minúscula y NO contener un caracter especial"
-      ),
+      .isLength({min : 8})
+      .withMessage("La contraseña debe tener un mínimo de 8 caracteres"),
   ],
   login
 );
@@ -90,10 +86,8 @@ router
       check("password")
         .notEmpty()
         .withMessage("La contraseña es obligatoria")
-        .matches(/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/)
-        .withMessage(
-          "La contraseña debe tener entre 8 y 16 caracteres, al menos un dígito, al menos una mayúscula, al menos una minúscula y NO contener un caracter especial"
-        ),
+        .isLength({min : 8})
+        .withMessage("La contraseña debe tener un mínimo de 8 caracteres"),
     ],
     editarUsuarios
   )

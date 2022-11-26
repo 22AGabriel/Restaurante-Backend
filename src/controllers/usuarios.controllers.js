@@ -122,10 +122,9 @@ export const login = async(req,res)=>{
    const token = await generarJWT(usuario._id, usuario.nombreUsuario)
 
    res.status(200).json({
-       mensaje: "El usuario existe",
-       uid:  usuario._id,
-       nombre: usuario.nombreUsuario,
-       token
+      uid:  usuario._id,
+      nombreUsuario: usuario.nombreUsuario,
+      token
    });
   } catch (error) {
    res.status(400).json({
