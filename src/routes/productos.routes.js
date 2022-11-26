@@ -28,10 +28,10 @@ router
         .isNumeric()
         .withMessage("El precio debe ser un numero")
         .custom((value) => {
-          if (value >= 100 && value <= 10000) {
+          if (value >= 50 && value <= 10000) {
             return true;
           } else {
-            throw new Error("El precio debe estar entre $100 y $10000");
+            throw new Error("El precio debe estar entre $50 y $10000");
           }
         }),
       check("detalle")
@@ -51,6 +51,7 @@ router
           "Sandwich",
           "Al plato",
           "Pures",
+          "Dulces típicos",
           "Agregados",
           "Bebida sin alcohol",
           "Bebida con alcohol",
@@ -78,10 +79,10 @@ router
         .isNumeric()
         .withMessage("El precio debe ser un numero")
         .custom((value) => {
-          if (value >= 100 && value <= 10000) {
+          if (value >= 50 && value <= 10000) {
             return true;
           } else {
-            throw new Error("El precio debe estar entre $100 y $10000");
+            throw new Error("El precio debe estar entre $50 y $10000");
           }
         }),
       check("detalle")
@@ -101,6 +102,7 @@ router
           "Sandwich",
           "Al plato",
           "Pures",
+          "Dulces típicos",
           "Agregados",
           "Bebida sin alcohol",
           "Bebida con alcohol",
