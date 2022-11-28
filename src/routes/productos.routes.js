@@ -7,14 +7,14 @@ import {
   listarProductos,
   obtenerProductos,
 } from "../controllers/productos.controllers";
-// import validarJWT from '../helpers/validar-jwt'
+import validarJWT from '../helpers/validar-jwt'
 const router = Router();
 
 router
   .route("/productos")
   .get(listarProductos)
   .post(
-    [
+    [ validarJWT,
       check("nombreProducto")
         .notEmpty()
         .withMessage("El nombre del producto es obligatorio")
@@ -65,7 +65,7 @@ router
   .route("/productos/:id")
   .get(obtenerProductos)
   .put(
-    [
+    [validarJWT,
       check("nombreProducto")
         .notEmpty()
         .withMessage("El nombre del producto es obligatorio")
@@ -111,6 +111,6 @@ router
     ],
     editarProducto
   )
-  .delete(borrarProducto);
+  .delete([validarJWT],borrarProducto);
 
 export default router;
