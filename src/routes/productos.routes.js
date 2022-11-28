@@ -7,14 +7,14 @@ import {
   listarProductos,
   obtenerProductos,
 } from "../controllers/productos.controllers";
-import validarJWT from '../helpers/validar-jwt'
+// import validarJWT from '../helpers/validar-jwt'
 const router = Router();
 
 router
   .route("/productos")
   .get(listarProductos)
   .post(
-    [ validarJWT,
+    [
       check("nombreProducto")
         .notEmpty()
         .withMessage("El nombre del producto es obligatorio")
@@ -37,7 +37,7 @@ router
       check("detalle")
         .notEmpty()
         .withMessage("El detalle del producto es obligatorio")
-        .isLength({ min: 25, max: 300 })
+        .isLength({ min: 5, max: 300 })
         .withMessage("El detalle debe contener entre 25 y 300 caracteres"),
       check("imagen")
         .notEmpty()
@@ -65,7 +65,7 @@ router
   .route("/productos/:id")
   .get(obtenerProductos)
   .put(
-    [validarJWT,
+    [
       check("nombreProducto")
         .notEmpty()
         .withMessage("El nombre del producto es obligatorio")
@@ -88,7 +88,7 @@ router
       check("detalle")
         .notEmpty()
         .withMessage("El detalle del producto es obligatorio")
-        .isLength({ min: 25, max: 300 })
+        .isLength({ min: 5, max: 300 })
         .withMessage("El detalle debe contener entre 25 y 300 caracteres"),
       check("imagen")
         .notEmpty()
@@ -111,6 +111,6 @@ router
     ],
     editarProducto
   )
-  .delete([validarJWT],borrarProducto);
+  .delete(borrarProducto);
 
 export default router;

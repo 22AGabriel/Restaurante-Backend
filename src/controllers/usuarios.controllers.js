@@ -1,7 +1,7 @@
 import { validationResult } from "express-validator";
 import Usuario from "../models/usuario";
 import bcrypt from 'bcryptjs';
-import generarJWT from "../helpers/jwt";
+// import generarJWT from "../helpers/jwt";
 
 export const crearUsuario = async (req, res) => {
   try {
